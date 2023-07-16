@@ -1,0 +1,27 @@
+CREATE TABLE Mesa (
+	id_mesa SERIAL PRIMARY KEY,
+	localizacao VARCHAR(50)
+);
+
+CREATE TABLE Funcionarios (
+  	id_funcionario SERIAL PRIMARY KEY,
+  	nome VARCHAR(50),
+  	login VARCHAR(50),
+  	senha VARCHAR(50)
+);
+
+CREATE TABLE Reservas (
+ 	id_reserva SERIAL PRIMARY KEY,
+	id_mesa INT,
+ 	nome_cliente VARCHAR (50),
+  	dataHora_reserva TIMESTAMP,
+  	numero_pessoas INT,
+  	FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa)
+);
+
+CREATE TABLE FeedbackClientes (
+    id_feedback SERIAL PRIMARY KEY,
+    nome_cliente VARCHAR(50),
+    data_feedback DATE,
+    classificacao INT
+);
