@@ -19,6 +19,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Mesa</th>
+                    <th>Localização</th>
                     <th>Nome do Cliente</th>
                     <th>Número de Pessoas</th>
                     <th>Ações</th>
@@ -32,6 +33,7 @@
                 <tr>
                     <td><%= reserva.getId() %></td>
                     <td><%= reserva.getMesa().getId() %></td>
+                    <td><%=reserva.getMesa().getLocalizacao()%></td>
                     <td><%= reserva.getNomeCliente() %></td>
                     <td><%= reserva.getNumeroPessoas() %></td>
                     <td>

@@ -96,44 +96,4 @@ public class MesaDAO {
 
         return mesas;
     }
-
-    /*public ArrayList<Mesa> getMesasDisponiveis() {
-        ArrayList<Mesa> mesas = new ArrayList<>();
-
-        try (Connection connection = new ConectaDB().getConexao()) {
-            this.sql = "SELECT * FROM mesa";
-            this.statement = connection.createStatement();
-            this.resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                Mesa mesa = new Mesa();
-                mesa.setId(resultSet.getInt("id_mesa"));
-                mesa.setLocalizacao(resultSet.getString("localizacao"));
-
-                mesas.add(mesa);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return mesas;
-    }*/
-
-    public boolean apagarMesa(int id){
-        boolean apagou = false;
-        try(Connection connection = new ConectaDB().getConexao()){
-            String sql = "DELETE FROM mesa WHERE id_mesa = ?";
-            this.preparedStatement = connection.prepareStatement(this.sql);
-            this.preparedStatement.setInt(1, id);
-
-            int rowsDeleted = this.preparedStatement.executeUpdate();
-            if(rowsDeleted > 0){
-                apagou = true;
-            }
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-
-        return apagou;
-    }
 }

@@ -25,9 +25,4 @@ public class MesaService {
         MesaDAO mesaDAO = new MesaDAO();
         return mesaDAO.getMesa(id);
     }
-
-    public boolean deletarMesa(int id){
-        MesaDAO mesaDAO = new MesaDAO();
-        return mesaDAO.apagarMesa(id);
-    }
 }

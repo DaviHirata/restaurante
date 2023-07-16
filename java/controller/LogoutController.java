@@ -14,13 +14,11 @@ public class LogoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("logout") != null) {
-            HttpSession session = req.getSession(false);
-            if (session != null) {
-                session.invalidate(); // Invalida a sessão atual
-            }
-            System.out.println("Desativando sessão");
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Invalida a sessão atual
         }
-        resp.sendRedirect("index.jsp");
+        RequestDispatcher dispatcher;
+        dispatcher = req.getRequestDispatcher("/index.jsp");
     }
 }

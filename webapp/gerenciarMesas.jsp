@@ -31,11 +31,6 @@
                     <td><%= mesa.getLocalizacao() %></td>
                     <td>
                         <a href="editarMesa.jsp?id=<%= mesa.getId() %>" class="btn btn-primary">Editar</a>
-                        <form method="post" action="mesa" style="display: inline;">
-                            <input type="hidden" name="action" value="excluir" />
-                            <input type="hidden" name="id" value="<%= mesa.getId() %>" />
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir esta mesa?')">Excluir</button>
-                        </form>
                     </td>
                 </tr>
                 <% } %>

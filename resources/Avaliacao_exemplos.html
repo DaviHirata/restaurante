@@ -1,0 +1,69 @@
+<!--no html-->
+
+<form method="post" action="enviar-feedback">
+    <label for="rating">Classificação:</label>
+    <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+    </div>
+    <!-- Restante dos campos do formulário -->
+    <input type="submit" value="Enviar Feedback" />
+</form>
+
+
+<!--no controller-->
+@Controller
+public class FeedbackController {
+
+    @Autowired
+    private FeedbackService feedbackService;
+
+    @PostMapping("/enviar-feedback")
+    public String enviarFeedback(@RequestParam("rating") int rating, /* Restante dos parâmetros do formulário */) {
+        // Salvar a avaliação no banco de dados
+        Feedback feedback = new Feedback();
+        feedback.setRating(rating);
+        // Setar os demais campos do feedback
+
+        feedbackService.salvarFeedback(feedback);
+
+        // Redirecionar para uma página de confirmação ou agradecimento
+        return "redirect:/agradecimento-feedback";
+    }
+
+    // Restante dos métodos do controlador
+}
+
+
+<!--no service-->
+@Service
+public class FeedbackService {
+
+    @Autowired
+    private FeedbackDAO feedbackDAO;
+
+    public void salvarFeedback(Feedback feedback) {
+        feedbackDAO.salvar(feedback);
+    }
+
+    // Restante dos métodos do serviço
+}
+
+
+<!--na dao-->
+@Repository
+public class FeedbackDAO {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public void salvar(Feedback feedback) {
+        String sql = "INSERT INTO feedback (rating, /* Outros campos */) VALUES (?, /* Outros valores */)";
+        jdbcTemplate.update(sql, feedback.getRating(), /* Outros valores */);
+    }
+
+    // Restante dos métodos do DAO
+}

@@ -22,8 +22,6 @@ public class MesaController extends HttpServlet {
             exibirFormularioEdicao(req, resp);
         } else if (action != null && action.equals("atualizar")) {
             editarMesa(req, resp);
-        } else if (action != null && action.equals("excluir")) {
-            excluirMesa(req, resp);
         } else {
             cadastrarMesa(req, resp);
         }
@@ -80,23 +78,6 @@ public class MesaController extends HttpServlet {
         req.setAttribute("mesa", mesa);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/editarMesa.jsp");
-        dispatcher.forward(req, resp);
-    }
-
-    public void excluirMesa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        int id = Integer.parseInt(req.getParameter("id"));
-
-        MesaService mesaService = new MesaService();
-        boolean excluido = mesaService.deletarMesa(id);
-
-        if(excluido == true){
-            req.setAttribute("mensagem", "Mesa excluída");
-            req.setAttribute("Mesas", new MesaDAO().getMesas());
-        } else{
-            req.setAttribute("mensagem", "Erro ao deletar");
-        }
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/gerenciarMesa.jsp");
         dispatcher.forward(req, resp);
     }
 }
